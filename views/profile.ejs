@@ -1,0 +1,189 @@
+
+<%- include('partials/messages') -%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>nhub Interns Blog</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/profile.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/modern-business.css">
+
+  <link href="css/awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/index"> <img src="./img/logo.png" alt="nHibg"> </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+  
+            <li class="nav-item">
+              <a class="nav-link"  href="/index">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/posthome">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/technicalhome">Tech-Report</a>
+            </li>
+            <%if(user){%>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Activity
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+              <a class="dropdown-item" href="" data-toggle="modal" data-target="#blogModal">Post</a>
+              <a class="dropdown-item" href="" data-toggle="modal" data-target="#exampleModal">Technical Report</a>
+            </div>
+          </li>
+        </li>
+        <%} else{%>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+              <a class="dropdown-item" href='/register'>Register</a>
+              <a class="dropdown-item" href='/login'>Login</a>
+            </div>
+          </li>
+        <%}%>
+        <li class="nav-item">
+          <a class="nav-link" style="color:#fd7e14; border-radius: 10px;" href='/logout'>Logout</a>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav><br>
+
+
+  <div class="col-lg-12  mt-3 text-center">
+     
+    <img src="./img/user.jpg" alt="..." class="rounded-circle mt-3">
+     
+<div class="mt-3">
+  <% if(user){ %>
+    <h3 style="color: #fd7e14;"> Name:  <%= user.fullName %></h3>
+      <h3 style="color: #fd7e14;">Email: <%= user.email %> </h3>
+         <% }; %>   
+</div>
+          
+
+    </div>
+        
+  
+
+  <div class="modal fade" id="blogModal" tabindex="-1" role="dialog" aria-labelledby="blogModal"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" style="color:#fd7e14;" id="blogModal"> Post</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form action="/blogPost/<%= user.id%>" method="post">
+  
+                      <div class="form-group">
+                          <label for="recipient-name" class="form-control-label">title</label>
+                          <input type="text" class="form-control" name="title" id="recipient-name">
+                      </div>
+                      
+                      <div class="form-group">
+                          <label for="message-text" class="form-control-label">Message:</label>
+                          <textarea class="form-control" name="message" id="message-text"></textarea>
+                      </div>
+  
+                      <div class="modal-footer">
+                          <button type="submit" class="btn btn-dark" style="color:#fd7e14">Submit</button>
+                      </div>
+                  </form>
+              </div>
+  
+          </div>
+      </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title"style="color:#fd7e14" id="exampleModal">Tech report</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form action="/techPost/<%= user.id%>" method="post">
+  
+                      <div class="form-group">
+                          <label for="recipient-name" class="form-control-label">Week</label>
+                          <select name="week" class="form-control" id="">
+                            <option value="week 1">Week 1</option>
+                            <option value="week 2">Week 2</option>
+                            <option value="week 3">Week 3</option>
+                            <option value="week 4">Week 4</option>
+                            <option value="week 5">Week 5</option>
+                            <option value="week 6">Week 6</option>
+                            <option value="week 7">Week 7</option>
+                            <option value="week 8">Week 8</option>
+                            <option value="week 9">Week 9</option>
+                            <option value="week 10">Week 10</option>
+                            <option value="week 11">Week 11</option>
+                            <option value="week 12">Week 12</option>
+                            <option value="week 13">Week 13</option>
+                            <option value="week 14">Week 14</option>
+                            <option value="week 15">Week 15</option>
+                            <option value="week 16">Week 16</option>
+                            <option value="week 17">Week 17</option>
+                            <option value="week 18">Week 18</option>
+                            <option value="week 19">Week 19</option>
+                            <option value="week 20">Week 20</option>
+                            <option value="week 21">Week 21</option>
+                            <option value="week 22">Week 22</option>
+                            <option value="week 23">Week 23</option>
+                            <option value="week 24">Week 24</option>
+                          </select>
+                      </div>
+                      
+                      <div class="form-group">
+                          <label for="message-text" class="form-control-label">Technical Report</label>
+                          <textarea class="form-control" name="message" id="message-text"></textarea>
+                      </div>
+  
+                      <div class="modal-footer">
+                          <button type="submit" class="btn btn-dark"  style="color:#fd7e14">Submit</button>
+                      </div>
+                  </form>
+              </div>
+  
+          </div>
+      </div>
+  </div>
+
+
+
+  <%- include('partials/footer') -%>
+
+
+

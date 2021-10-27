@@ -1,0 +1,109 @@
+           <!-- Footer -->
+           
+           <footer class="py-5 bg-dark">
+            <div class="container">
+              <p class="m-0 text-center text-white" style="color: #fd7e14;">Copyright &copy; nHub foundation</p>
+           
+            </div>
+            <!-- /.container -->
+          </footer>
+                
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+                <script src="js/scripts.js"></script>
+                <script src="/public/js/passwordConfirm.js"></script>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+      <script>
+        $(document).ready(function() {
+    $('#example').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+      </script>
+    
+    <script type="text/javascript">
+      $(function () {
+          $("#btnSubmit").click(function () {
+              var password = $("#inputPassword").val();
+              var confirmPassword = $("#inputConfirmPassword").val();
+              if (password != confirmPassword) {
+                  alert("Passwords do not match.");
+                  return false;
+              }
+              return true;
+          });
+      });
+  </script>
+
+<script>
+  $(document).ready(function(){
+    setTimeout (function(){
+      $(".stay-small").slideUp(300)
+    }, 5000)
+  });
+
+
+  $(document).ready( function () {
+    $('#table_id').DataTable({
+      "bSort": false
+    });
+} );
+</script>
+<script>
+    var updatePostStats = {
+        Like: function (postId) {
+            document.querySelector('#likes-count-' + postId).textContent++;
+        },
+        Unlike: function(postId) {
+            document.querySelector('#likes-count-' + postId).textContent--;
+        }
+    };
+
+    var toggleButtonText = {
+        Like: function(button) {
+            button.textContent = "Unlike";
+        },
+        Unlike: function(button) {
+            button.textContent = "Like";
+        }
+    };
+
+    var actOnPost = function (event) {
+        var postId = event.target.dataset.postId;
+        var action = event.target.textContent.trim();
+        toggleButtonText[action](event.target);
+        updatePostStats[action](postId);
+        axios.post('/blogPost/' + postId, { action: action });
+    };
+</script>
+
+<script>
+    var pusher = new Pusher('your-app-id', {
+        cluster: 'your-app-cluster'
+    });
+    var socketId;
+
+    // retrieve the socket ID on successful connection
+    pusher.connection.bind('connected', function() {
+        socketId = pusher.connection.socket_id;
+    });
+
+
+    var channel = pusher.subscribe('post-events');
+    channel.bind('postAction', function(data) {
+        // log message data to console - for debugging purposes
+        console.log(data);
+        var action = data.action;
+        updatePostStats[action](data.postId);
+    });
+</script>
+
+
+
+
+            </body>
+        </html>
+        

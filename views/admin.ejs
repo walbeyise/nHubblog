@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Admin</title>
+        <link href="/admin public/dist/css/styles.css" rel="stylesheet"/>
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+        
+    </head>
+              <body class="sb-nav-fixed">
+                <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+                    <a class="navbar-brand" href="/" style="color:#fd7e14;">Home</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+                 
+                </nav>
+                
+                <div id="layoutSidenav">
+                    <div id="layoutSidenav_nav">
+                        <nav class="sb-sidenav accordion sb-sidenav-dark sb-sidenav responsive" id="sidenavAccordion">
+                            <div class="sb-sidenav-menu sb-sidenav-responsive">
+                                <div class="nav">
+                                    <a class="nav-link" href="" data-toggle="modal" data-target="#blogModal" style="color:#fd7e14">
+                                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                     Post</a >
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>
+                                        <li class="nav-item">
+                                          <a class="nav-link" style="color:#fd7e14; border-radius: 10px;" href='/logout'>Logout</a>
+                                        </li>
+                                        </nav>
+                                    </div>
+                                   
+                                  </div>
+                        </nav>
+                    </div>
+                    <div id="layoutSidenav_content">
+
+
+<div class="modal fade" id="blogModal" tabindex="-1" role="dialog" aria-labelledby="blogModal" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" style="color:#fd7e14;" id="blogModal"> Post</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <form action="/blogPost/<%= user.id%>" method="post">
+
+              <div class="form-group">
+                  <label for="recipient-name" class="form-control-label">title</label>
+                  <input type="text" class="form-control" name="title" id="recipient-name">
+              </div>
+              
+              <div class="form-group">
+                  <label for="message-text" class="form-control-label">Message:</label>
+                  <textarea class="form-control" name="message" id="message-text"></textarea>
+              </div>
+
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-dark" style="color:#fd7e14">Submit</button>
+              </div>
+          </form>
+      </div>
+      </div>
+      </div>
+</div>
+            </div>
+            
+
+
+<div>
+
+    <div class="container col-lg-6 mt-3" style="margin-left: 30%;">
+        <h2 style="color: #fd7e14;">Technical Report</h2>
+            <table class="table" id="table_id">
+        <thead>
+          <tr>
+            <th>
+              <h2 style="color: #fd7e14;">Technical Report</h2>
+            </th>
+          </tr>
+          <tr>
+          </thead>
+            <tbody>
+              <% for(let i=0; i < tech.length; i++){ %>
+                <tr>
+                  <th>
+                <!-- Blog Post -->
+                <div class="card mb-4 mt-5">
+                        <div class="card-body">
+                            <div class="col-lg-12">
+                              
+                              <h2 class="card-title" style="color: rgb(86, 90, 94)"><%= tech[i].week %></h2>
+                              <p class="card-text"><%= tech[i].message %></p>
+            
+                        <div class="card-footer text-muted">
+                          Posted By <%= tech[i].fullName%>
+                         Posted on <%= tech[i].creationDate %>
+                         <form method="POST" action="/delete/<%= tech[i].id %>" >
+                            <button type="submit" class="btn tbn-sm btn-danger" value="<% tech._id %>">Delete</button>
+                          </form>
+                      </th>
+                    </tr>
+                        <%};%>
+                  </tbody>
+                  
+            </table>
+          </div>
+        </div>
+        
+        </div>
+        </div>
+        </div>
+            
+        </div>
+      
+   
+        
+
+              <!-- Footer -->
+  <footer class="py-5 bg-dark mt-5">
+        <div class="container">
+          <p class="m-0 text-center text-white">Copyright &copy; nHub foundation</p>
+
+        </div>
+        <!-- /.container -->
+      </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/admin public/dist/js/scripts.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+
+<script>
+    $(document).ready(function(){
+      setTimeout (function(){
+        $(".stay-small").slideUp(300)
+      }, 5000)
+    });
+
+
+
+
+   
+</script>
+
+        </body>
+</html>
+

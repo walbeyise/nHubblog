@@ -1,0 +1,49 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+  <!-- Page Content -->
+  <div class="container">
+    <h2 style="color: #fd7e14;">Technical Report</h2>
+        <table class="table" id="table_id">
+    <thead>
+      <tr>
+        <th>
+          <h2 style="color: #fd7e14;">Technical Report</h2>
+        </th>
+      </tr>
+      <tr>
+      </thead>
+        <tbody>
+          <% for(let i=0; i < tech.length; i++){ %>
+            <tr>
+              <th>
+            <!-- Blog Post -->
+            <div class="card mb-4 mt-5">
+                    <div class="card-body">
+                        <div class="col-lg-12">
+                          
+                          <h2 class="card-title" style="color: rgb(86, 90, 94)"><%= tech[i].week %></h2>
+                          <p class="card-text"><%= tech[i].message %></p>
+        
+                    <div class="card-footer text-muted">
+                      Posted By <%= tech[i].fullName%>
+                     Posted on <%= tech[i].creationDate %>
+                   
+                  </th>
+                </tr>
+                    <%}%>
+              </tbody>
+        </table>
+      </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+        
+    </div>
+      
+      
+      
+ 
+  <!-- /.container -->
+<% include ./partials/footer %>
